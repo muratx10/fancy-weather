@@ -1,22 +1,16 @@
 {
-  "name": "Codejam-Image-API",
+  "name": "muratx10-RS2019Q3",
   "version": "1.0.0",
-  "description": "private repository",
+  "description": "Fancy weather app",
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src/scripts/app.js --fix",
     "build": "webpack --mode production",
-    "dev": "webpack-dev-server --mode development --open 'Firefox'"
+    "dev": "webpack-dev-server --mode development"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rolling-scopes-school/muratx10-RS2019Q3.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rolling-scopes-school/muratx10-RS2019Q3/issues"
   },
   "browserslist": [
     "last 3 version",
@@ -24,6 +18,12 @@
     "maintained node versions",
     "not dead"
   ],
+  "keywords": [],
+  "author": "muratx10",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rolling-scopes-school/muratx10-RS2019Q3/issues"
+  },
   "homepage": "https://github.com/rolling-scopes-school/muratx10-RS2019Q3#readme",
   "devDependencies": {
     "@babel/core": "^7.7.2",
