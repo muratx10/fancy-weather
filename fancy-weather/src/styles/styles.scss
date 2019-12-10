@@ -34,25 +34,39 @@ body {
   align-self: center;
   background: url("../assets/images/austria.jpg") no-repeat;
   background-size: 100%;
+  font-size: 1.5rem;
   
   .header {
     grid-area: header;
     background: red;
-    opacity: 0.7;
     display: grid;
     grid: 1fr / repeat(2, 1fr);
+    
+    &__search {
+      width: 80%;
+      justify-self: center;
+      align-self: center;
+      
+      input {
+        font-size: 1.5rem;
+      }
+      
+      input:focus, input:active {
+        outline:0;
+        -webkit-appearance:none;
+        box-shadow: none;
+      }
+    }
   }
   
   .weather {
     grid-area: weather;
     background: lighten(green, 50%);
-    opacity: 0.7;
   }
   
   .map {
     grid-area: map;
     background: lighten(black, 50%);
-    opacity: 0.7;
   }
   
 }

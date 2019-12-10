@@ -16,13 +16,20 @@
 <div class="bg"></div>  
 <div class="root">
     
-    <div class="wrapper">
+    <div class="wrapper shadow">
       <div class="header">
-        <div class="control">
+        <div class="header__control">
           controls
         </div>
-        <div class="search">
-          search
+        <div class="header__search">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">&#x1F50D;</span>
+            </div>
+            <input type="text" class="form-control" 
+                   placeholder="Search city or ZIP" 
+                   aria-label="Search city" aria-describedby="basic-addon1">
+          </div>
         </div>
       </div>
       <div class="weather">
