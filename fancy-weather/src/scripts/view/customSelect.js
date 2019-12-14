@@ -1,11 +1,11 @@
 export default function () {
-  for (const dropdown of document.querySelectorAll(".custom-select-wrapper")) {
+  for (const dropdown of document.querySelectorAll('.custom-select-wrapper')) {
     dropdown.addEventListener('click', function () {
       this.querySelector('.custom-style').classList.toggle('open');
     });
   }
 
-  for (const option of document.querySelectorAll(".custom-option")) {
+  for (const option of document.querySelectorAll('.custom-option')) {
     option.addEventListener('click', function () {
       if (!this.classList.contains('selected')) {
         this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
@@ -15,7 +15,7 @@ export default function () {
     });
   }
 
-  window.addEventListener('click', function (e) {
+  window.addEventListener('click', (e) => {
     for (const select of document.querySelectorAll('.custom-style')) {
       if (!select.contains(e.target)) {
         select.classList.remove('open');

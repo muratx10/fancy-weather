@@ -1,218 +1,127 @@
 @import "variables";
 @import "fonts";
+@import "component";
 
 body {
+  font-family: 'Montserrat', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Nunito", Arial, sans-serif;
+  height: 100vh;
 }
 
 .bg {
-  width: 100vw;
-  height: 100vh;
-  background: url("../assets/images/austria.jpg") no-repeat 0 50%;
-  background-size: 140%;
   position: absolute;
   z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background: url("../assets/images/bg.jpg") no-repeat 0 50%;
+  background-size: 140%;
   filter: blur(8px);
   -webkit-filter: blur(8px);
 }
 
 .root {
   display: grid;
-  height: 100vh;
   width: 100vw;
+  height: 100%;
 }
 
 .wrapper {
+  font-size: 1.5rem;
+  position: relative;
   display: grid;
-  grid: 1fr 4fr / repeat(2, 1fr);
-  grid-template-areas: 'header header'
-                       'weather map';
+  overflow: hidden;
+  align-self: center;
+  padding-left: 30px;
   width: 85%;
   height: 85%;
   border-radius: 15px;
-  overflow: hidden;
+  background: url("../assets/images/bg.jpg") no-repeat;
+  background-size: cover;
+  grid: 200px 4fr / 2fr 1.5fr;
+  grid-template-areas: 'header header' 
+                       'weather map';
   justify-self: center;
-  align-self: center;
-  background: url("../assets/images/austria.jpg") no-repeat;
-  background-size: 100%;
-  font-size: 1.5rem;
-  outline: 2px solid darkred;
-  
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  border: 5px solid rgba(255, 255, 255, 0.7);
+
+  .darkLayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+  }
+
   .header {
-    grid-area: header;
+    z-index: 2;
     display: grid;
-    grid: 1fr / repeat(2, 1fr);
     align-items: center;
-    
+    grid-area: header;
+    grid: 1fr / repeat(2, 1fr);
+    min-height: 120px;
+
     .control {
+      display: grid;
+      align-items: center;
+      justify-content: left;
+      min-width: 500px;
+      max-width: 550px;
       padding-left: 15px;
-      
+      grid: 1fr / 1fr 2fr 5fr;
+
       &__item {
-        text-decoration: none;
-        color: $inactiveText;
+        line-height: 55px;
         display: block;
         width: 50px;
         height: 50px;
-        background: $buttonBg;
-        border-radius: 8px;
-        text-align: center;
-        line-height: 55px;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
         transition: 200ms;
-        
+        text-align: center;
+        text-decoration: none;
+        color: $inactiveText;
+        border-radius: 8px;
+        background: $buttonBg;
+
         &:hover {
-          background: lighten($buttonBg, 25%);
           color: #FFFFFF;
+          //background: lighten($buttonBg, 25%);
+          box-shadow: $textGlow;
+          text-shadow: $textGlow;
         }
-        
+
         &:active {
           background: lighten($buttonBg, 10%);
         }
       }
-
-      .selectLang {
-        margin: 20px;
-        max-width: 300px;
-      }
-
-      .custom-select-wrapper {
-        position: relative;
-        user-select: none;
-        width: 100%;
-      }
-
-      .custom-style {
-        display: flex;
-        flex-direction: column;
-        border-width: 0 2px 0 2px;
-        border-style: solid;
-        border-color: #394a6d;
-      }
-
-      .custom-style__trigger {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 22px;
-        font-size: 20px;
-        font-weight: 300;
-        color: #3b3b3b;
-        height: 60px;
-        line-height: 60px;
-        background: #ffffff;
-        cursor: pointer;
-        border-width: 2px 0 2px 0;
-        border-style: solid;
-        border-color: #394a6d;
-      }
-
-      .custom-options {
-        position: absolute;
-        display: block;
-        top: 100%;
-        left: 0;
-        right: 0;
-        border: 2px solid #394a6d;
-        border-top: 0;
-        background: #fff;
-        transition: all 0.5s;
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        z-index: 2;
-      }
-
-      .custom-style.open .custom-options {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: all;
-      }
-
-      .custom-option {
-        position: relative;
-        display: block;
-        padding: 0 22px 0 22px;
-        font-size: 22px;
-        font-weight: 300;
-        color: #3b3b3b;
-        line-height: 60px;
-        cursor: pointer;
-        transition: all 0.5s;
-      }
-
-      .custom-option:hover {
-        cursor: pointer;
-        background-color: #b2b2b2;
-      }
-
-      .custom-option.selected {
-        color: #ffffff;
-        background-color: #305c91;
-      }
-
-      .arrow {
-        position: relative;
-        height: 15px;
-        width: 15px;
-      }
-
-      .arrow::before,
-      .arrow::after {
-        content: "";
-        position: absolute;
-        bottom: 0px;
-        width: 0.15rem;
-        height: 100%;
-        transition: all 0.5s;
-      }
-
-      .arrow::before {
-        left: -5px;
-        transform: rotate(45deg);
-        background-color: #394a6d;
-      }
-
-      .arrow::after {
-        left: 5px;
-        transform: rotate(-45deg);
-        background-color: #394a6d;
-      }
-
-      .open .arrow::before {
-        left: -5px;
-        transform: rotate(-45deg);
-      }
-
-      .open .arrow::after {
-        left: 5px;
-        transform: rotate(45deg);
-      }
-
     }
-    
+
     .search {
+      position: relative;
+      align-self: center;
       width: 90%;
       justify-self: center;
-      align-self: center;
-      position: relative;
-      
+
       .voice {
         position: absolute;
-        left: 15px;
         top: 0;
+        left: 15px;
         height: 100%;
-        
+
         .btn {
           color: $inactiveText;
           border: none;
 
           &:hover {
+            color: #FFFFFF;
             background: none;
-            color: #ffffff;
+            text-shadow: $textGlow;
           }
-          
+
           .icon-mic {
             position: absolute;
             top: 30%;
@@ -220,50 +129,137 @@ body {
           }
         }
       }
-      
+
       input {
         font-size: 1.5rem;
-        background: $semiTransparentBg;
+        font-weight: 200;
+        padding-left: 60px;
         color: $textColor;
         border: 1px solid transparent;
-        padding-left: 60px;
         border-top-left-radius: 10px !important;
         border-bottom-left-radius: 10px !important;
+        background: $semiTransparentBg;
+        text-shadow: $textGlow;
       }
-      
+
       input:focus, input:active {
-        outline:0;
-        -webkit-appearance:none;
-        box-shadow: none;
         border: 1px solid $textColor;
         border-right: none;
+        outline: 0;
+        box-shadow: none;
+        -webkit-appearance: none;
       }
-      
+
       input::placeholder {
         color: $inactiveText;
+        text-shadow: none;
       }
-      
+
       .input-group .btn {
         font-size: 1.2rem;
+        font-weight: 200;
         text-transform: uppercase;
-        font-weight: bold;
-        &:focus, &:active {
-          outline:0;
-          -webkit-appearance:none;
+
+        &:hover {
+          text-shadow: $textGlow;
+        }
+
+        &:focus,
+        &:active {
+          outline: 0;
           box-shadow: none;
+          -webkit-appearance: none;
         }
       }
     }
   }
-  
+
   .weather {
+    z-index: 1;
+    //outline: 1px dashed blue;
     grid-area: weather;
-    background: lighten(green, 50%);
+    //display: grid;
+    //grid: 10% 5% 40% 40% / 1fr;
+    padding-left: 15px;
+    position: relative;
+    
+    &__location {
+      font-size: 45px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: $textColor;
+
+      @include textShadow();
+    }
+
+    &__date {
+      @include textShadow();
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: $textColor;
+    }
+
+    &__condition {
+      display: grid;
+      height: 300px;
+      grid: 1fr 1fr / 1fr 1fr;
+    }
+    
+    &__temperature {
+      position: relative;
+      letter-spacing: 2px;
+      color: $textColor;
+      background: rgba(255, 255, 255, 0.5);
+      min-height: 270px;
+      
+      #temperature {
+        @include textShadow();
+        font-size: 250px;
+        font-weight: 700;
+        line-height: 100px;
+        position: relative;
+        top: 30%;
+        
+        &:after {
+          content: '\00B0';
+          display: inline-block;
+          position: absolute;
+          top: 50px;
+          right: -50px;
+          font-size: 100px;
+        }
+      }
+    }
+    
+    &__description {
+      @include textShadow();
+      color: $textColor;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: rgba(255, 255, 0, 0.5);
+      
+      span {
+        display: block;
+      }
+    }
+    
+    &__icon {
+      height: 50%;
+      background: rgba(255, 0, 255, 0.4);
+    }
+    
+    &__forecast {
+      background: greenyellow;
+      min-height: 120px;
+    }
   }
-  
+
   .map {
+    z-index: 2;
+    //outline: 1px dashed aqua;
     grid-area: map;
-    background: lighten(black, 50%);
   }
-  
+
 }
