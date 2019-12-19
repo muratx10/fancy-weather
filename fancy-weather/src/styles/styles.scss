@@ -1,9 +1,10 @@
 @import "variables";
 @import "fonts";
 @import "component";
+@import "weather-icons";
 
 body {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -39,11 +40,12 @@ body {
   background: url("../assets/images/bg.jpg") no-repeat;
   background-size: cover;
   grid: 200px 4fr / 2fr 1.5fr;
-  grid-template-areas: 'header header' 
-                       'weather map';
+  grid-template-areas:
+    "header header"
+    "weather map";
   justify-self: center;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  border: 5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  //border: 5px solid rgba(255, 255, 255, 0.7);
 
   .darkLayer {
     position: absolute;
@@ -88,7 +90,7 @@ body {
         background: $buttonBg;
 
         &:hover {
-          color: #FFFFFF;
+          color: #ffffff;
           //background: lighten($buttonBg, 25%);
           box-shadow: $textGlow;
           text-shadow: $textGlow;
@@ -117,7 +119,7 @@ body {
           border: none;
 
           &:hover {
-            color: #FFFFFF;
+            color: #ffffff;
             background: none;
             text-shadow: $textGlow;
           }
@@ -142,7 +144,8 @@ body {
         text-shadow: $textGlow;
       }
 
-      input:focus, input:active {
+      input:focus,
+      input:active {
         border: 1px solid $textColor;
         border-right: none;
         outline: 0;
@@ -182,7 +185,7 @@ body {
     //grid: 10% 5% 40% 40% / 1fr;
     padding-left: 15px;
     position: relative;
-    
+
     &__location {
       font-size: 45px;
       font-weight: bold;
@@ -195,24 +198,31 @@ body {
 
     &__date {
       @include textShadow();
-      font-size: 40px;
+      font-size: 35px;
       letter-spacing: 2px;
       color: $textColor;
+
+      @media screen and (max-width: 1330px) {
+        font-size: 30px;
+      }
     }
 
     &__condition {
       display: grid;
       height: 300px;
       grid: 1fr 1fr / 1fr 1fr;
+      min-width: 545px;
+      max-width: 700px;
     }
-    
+
     &__temperature {
       position: relative;
       letter-spacing: 2px;
       color: $textColor;
-      background: rgba(255, 255, 255, 0.5);
+      //background: rgba(255, 255, 255, 0.5);
       min-height: 270px;
-      
+      text-align: center;
+
       #temperature {
         @include textShadow();
         font-size: 250px;
@@ -220,39 +230,76 @@ body {
         line-height: 100px;
         position: relative;
         top: 30%;
-        
-        &:after {
-          content: '\00B0';
-          display: inline-block;
-          position: absolute;
-          top: 50px;
-          right: -50px;
-          font-size: 100px;
-        }
+      }
+      .degSign {
+        font-size: 120px;
+        position: relative;
+        top: -20px;
+        display: none;
       }
     }
-    
+
     &__description {
       @include textShadow();
       color: $textColor;
       text-transform: uppercase;
       font-weight: 700;
       letter-spacing: 2px;
-      background: rgba(255, 255, 0, 0.5);
-      
+
+      & .weather__icon {
+        text-align: left;
+        i {
+          font-size: 110px;
+        }
+      }
+
+      & .weather__feels,
+      & .weather__wind,
+      & .weather__humidity {
+        span {
+          display: inline;
+        }
+      }
+
       span {
         display: block;
       }
     }
-    
+
     &__icon {
       height: 50%;
-      background: rgba(255, 0, 255, 0.4);
     }
-    
+
     &__forecast {
-      background: greenyellow;
       min-height: 120px;
+      display: grid;
+      grid: 1fr / auto auto auto;
+
+      & .forecast__item {
+        @include textShadow();
+        display: grid;
+        grid: 1fr 3fr / 2fr 1fr;
+        grid-template-areas:
+          "day day"
+          "temp temp";
+        color: $textColor;
+        padding-left: 15px;
+
+        &:not(:first-child) {
+          border-left: 1px solid $textColor;
+        }
+
+        & .day {
+          font-size: 22px;
+          grid-area: day;
+        }
+
+        & .temperature {
+          font-size: 80px;
+          grid-area: temp;
+          line-height: 70px;
+        }
+      }
     }
   }
 
@@ -261,5 +308,4 @@ body {
     //outline: 1px dashed aqua;
     grid-area: map;
   }
-
 }

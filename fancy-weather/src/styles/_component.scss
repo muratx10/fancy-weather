@@ -6,18 +6,18 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  
+
   .custom-select-wrapper {
     position: relative;
     width: 100%;
     user-select: none;
     transition: 200ms;
-    
+
     &:hover .custom-style__trigger,
     &:hover .arrow:after,
     &:hover .arrow:before {
       text-shadow: $textGlow;
-      color: #FFFFFF;
+      color: #ffffff;
       box-shadow: $textGlow;
     }
   }
@@ -33,7 +33,7 @@
   .custom-style__trigger {
     font-size: 1.5rem;
     font-weight: 300;
-    font-family: 'Montserrat', Arial, sans-serif;
+    font-family: "Montserrat", Arial, sans-serif;
     line-height: 60px;
     position: relative;
     display: flex;
@@ -79,7 +79,6 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
-  
 
   .custom-option {
     font-size: 22px;
@@ -144,7 +143,6 @@
 }
 
 .unit {
-  
   &__item {
     display: inline-block;
     width: 50px;
@@ -161,25 +159,25 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    
+
     &:hover {
       background: lighten($buttonBg, 10%);
       color: $textColor;
       text-shadow: $textGlow;
       box-shadow: $textGlow;
     }
-    
+
     &:active {
       background: lighten($buttonBg, 20%);
     }
   }
-  
+
   &__item:nth-child(1) {
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     border-right: 1px solid $inactiveText;
   }
-  
+
   &__item:nth-child(2) {
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
@@ -188,14 +186,50 @@
 }
 
 .active {
-  color: #FFFFFF;
+  color: #ffffff;
   background: darken($buttonBg, 50%);
-  
+
   &:hover {
     background: darken($buttonBg, 50%);
   }
 }
 
 @mixin textShadow {
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.weather-icon {
+  span {
+    font-size: 80px;
+  }
+}
+
+.spinner-border {
+  vertical-align: unset;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+.weather__temperature {
+  .spinner-border {
+    width: 100px;
+    height: 100px;
+    vertical-align: super;
+    font-size: 40px;
+  }
+}
+
+.weather__description {
+  .wi {
+    line-height: 135px;
+  }
+}
+
+.forecast__item {
+  i {
+    font-size: 50px;
+    vertical-align: top;
+  }
 }

@@ -16,6 +16,13 @@ const conf = {
   module: {
     rules: [
       {
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: [
+          /node_modules/,
+        ],
+      },
+      {
         test: /\.(html)$/,
         use: {
           loader: 'html-loader',
@@ -87,7 +94,6 @@ const conf = {
       },
     }),
   ],
-
 };
 
 module.exports = (env, options) => {
