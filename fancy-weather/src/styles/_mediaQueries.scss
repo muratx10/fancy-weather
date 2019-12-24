@@ -1,0 +1,54 @@
+@media screen and (max-width: 1170px) {
+  //grid: 150px 4fr/2fr 1.5fr;
+  //grid-template-areas:
+  //  "header header"
+  //  "weather map";
+  body .bg {
+    height: 142vh;
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+  
+  .root {
+    padding-top: 30px;  
+    
+    .wrapper {
+      grid: 150px 2fr 2fr / 1fr;
+      grid-template-areas: "header"
+                           "weather"
+                           "map";
+      height: fit-content;
+      padding: 0;
+      
+      .header {
+        grid: 1fr / 35% 65%;
+        
+        .control {
+          grid-column-gap: 10px;
+        }
+      }
+      
+      .weather {
+        width: 90%;
+        justify-self: center;
+        padding: 0;
+        
+        .weather__condition {
+          grid: 1fr / 1fr 1fr;
+          width: 100%;
+          max-width: unset;
+        }
+      }
+      
+      .map {
+        display: grid;
+        justify-items: center;
+        padding-bottom: 20px;
+        
+        .mapContainer {
+          height: 100%;
+        }
+      }
+    }
+  }
+}

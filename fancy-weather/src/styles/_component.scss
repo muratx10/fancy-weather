@@ -233,3 +233,21 @@
     vertical-align: top;
   }
 }
+
+.modal-content {
+  background-color: $buttonBg;
+  color: $textColor;
+  
+  .modal-header {
+    
+    .closeBtn {
+      color: $textColor;
+      text-shadow: $textGlow;
+    }
+  }
+}
+
+#search-btn {
+  border: 1px solid transparent;
+  transition: 200ms;
+}

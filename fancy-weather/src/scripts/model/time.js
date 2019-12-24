@@ -1,42 +1,41 @@
-const getTime = (zone, lang) => {
-  // let timeCurrent = new Date(localStorage.getItem('time') * 1000);
-  const weekdaysBe = ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацвер', 'Пятніца', 'Субота'];
-  const weekdaysBeShort = ['Нд', 'Пн', 'Аў', 'Ср', 'Чц', 'Пт', 'Сб'];
-  const monthsBe = ['cтудзеня', 'лютага', 'сакавіка', 'красавіка', 'мая', 'чэрвеня', 'ліпеня', 'жніўня', 'верасня', 'кастрычніка', 'лістапада', 'снежня'];
-  const localDate = new Date().toLocaleString('en', {
+const GET_TIME = (zone, lang) => {
+  const WEEKDAY_BEL = ['Нядзеля', 'Панядзелак', 'Аўторак', 'Серада', 'Чацвер', 'Пятніца', 'Субота'];
+  const WEEKDAY_BEL_SHORT = ['Нд', 'Пн', 'Аў', 'Ср', 'Чц', 'Пт', 'Сб'];
+  const MONTHS_BEL = ['cтудзеня', 'лютага', 'сакавіка', 'красавіка', 'мая', 'чэрвеня', 'ліпеня', 'жніўня', 'верасня', 'кастрычніка', 'лістапада', 'снежня'];
+  const LOCAL_DATE = new Date().toLocaleString('en', {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
     timeZone: zone,
   });
-  const localDay = new Date().toLocaleString('en', {
+  const LOCAL_DAY = new Date().toLocaleString('en', {
     day: 'numeric',
     timeZone: zone,
   });
-  const localDateShort = new Date().toLocaleString('ru', {
+  const LOCAL_DATE_SHORT = new Date().toLocaleString('ru', {
     year: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
     timeZone: zone,
   });
 
-  const msDay = 86400000;
-  let timeFirst = new Date(Date.parse(localDate) + msDay);
-  let timeSecond = new Date(Date.parse(localDate) + msDay * 2); //2 days forth
-  let timeThird = new Date(Date.parse(localDate) + msDay * 3); //3 days forth
+  const DAY_MS = 86400000;
+  const DAY_ONE = new Date(Date.parse(LOCAL_DATE) + DAY_MS);
+  const DAY_TWO = new Date(Date.parse(LOCAL_DATE) + DAY_MS * 2);
+  const DAY_THREE = new Date(Date.parse(LOCAL_DATE) + DAY_MS * 3);
 
-  let timeString = '';
-  let timeFirstString = '';
-  let timeSecondString = '';
-  let timeThirdString = '';
+  let MAIN_DATE = '';
+  let DAY_ONE_DATE = '';
+  let DAY_TWO_DATE = '';
+  let DAY_THREE_DATE = '';
 
   if (lang === 'be') {
-    timeString = `${weekdaysBeShort[new Date(Date.parse(localDate)).getDay()]} ${localDay} ${monthsBe[new Date(Date.parse(localDate)).getMonth()]} ${localDateShort}`;
-    timeFirstString = weekdaysBe[timeFirst.getDay()];
-    timeSecondString = weekdaysBe[timeSecond.getDay()];
-    timeThirdString = weekdaysBe[timeThird.getDay()];
+    MAIN_DATE = `${WEEKDAY_BEL_SHORT[new Date(Date.parse(LOCAL_DATE)).getDay()]} ${LOCAL_DAY} ${MONTHS_BEL[new Date(Date.parse(LOCAL_DATE)).getMonth()]} ${LOCAL_DATE_SHORT}`;
+    DAY_ONE_DATE = WEEKDAY_BEL[DAY_ONE.getDay()];
+    DAY_TWO_DATE = WEEKDAY_BEL[DAY_TWO.getDay()];
+    DAY_THREE_DATE = WEEKDAY_BEL[DAY_THREE.getDay()];
   } else {
-    timeString = new Date().toLocaleString(lang, {
+    MAIN_DATE = new Date().toLocaleString(lang, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -45,36 +44,59 @@ const getTime = (zone, lang) => {
       minute: 'numeric',
       timeZone: zone,
     });
-    timeFirstString = timeFirst.toLocaleString(lang, {
+    DAY_ONE_DATE = DAY_ONE.toLocaleString(lang, {
       weekday: 'long',
     });
-    timeSecondString = timeSecond.toLocaleString(lang, {
+    DAY_TWO_DATE = DAY_TWO.toLocaleString(lang, {
       weekday: 'long',
     });
-    timeThirdString = timeThird.toLocaleString(lang, {
+    DAY_THREE_DATE = DAY_THREE.toLocaleString(lang, {
       weekday: 'long',
     });
   }
 
   if (lang === 'ru') {
-    timeString = timeString.charAt(0).toUpperCase() + timeString.slice(1);
-    timeFirstString = timeFirstString.charAt(0).toUpperCase() + timeFirstString.slice(1);
-    timeSecondString = timeSecondString.charAt(0).toUpperCase() + timeSecondString.slice(1);
-    timeThirdString = timeThirdString.charAt(0).toUpperCase() + timeThirdString.slice(1);
+    MAIN_DATE = MAIN_DATE.charAt(0).toUpperCase() + MAIN_DATE.slice(1);
+    DAY_ONE_DATE = DAY_ONE_DATE.charAt(0).toUpperCase() + DAY_ONE_DATE.slice(1);
+    DAY_TWO_DATE = DAY_TWO_DATE.charAt(0).toUpperCase() + DAY_TWO_DATE.slice(1);
+    DAY_THREE_DATE = DAY_THREE_DATE.charAt(0).toUpperCase() + DAY_THREE_DATE.slice(1);
   }
 
-  const currentHour = new Date(timeString.replace(/,/g, '')).getHours();
-
-  const time = {
-    currentDate: timeString.replace(/,/g, ''),
-    hour: currentHour,
-    day_ONE: timeFirstString,
-    day_TWO: timeSecondString,
-    day_THREE: timeThirdString,
+  const CURRENT_DATE = new Date(new Date().toLocaleString('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    timeZone: zone,
+  }));
+  const isDayTime = CURRENT_DATE.getHours() > 7 && CURRENT_DATE.getHours() < 19;
+  const SEASONS = {
+    winter: [11, 0, 1],
+    spring: [2, 3, 4],
+    summer: [5, 6, 7],
+    autumn: [8, 9, 10],
   };
 
-  return time;
+  let SEASON_NAME = null;
+  Object.keys(SEASONS).forEach((item) => {
+    if (SEASONS[item].includes(CURRENT_DATE.getMonth())) {
+      SEASON_NAME = item;
+    }
+  });
+
+  const TIME = {
+    currentDate: MAIN_DATE.replace(/,/g, ''),
+    hour: CURRENT_DATE,
+    season: SEASON_NAME,
+    isDayTime: isDayTime,
+    day_ONE: DAY_ONE_DATE,
+    day_TWO: DAY_TWO_DATE,
+    day_THREE: DAY_THREE_DATE,
+  };
+
+  return TIME;
 };
 
-// setInterval(getTime, 60000);
-export default getTime;
+export default GET_TIME;

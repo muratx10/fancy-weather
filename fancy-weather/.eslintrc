@@ -8,5 +8,8 @@
     "NodeList": true,
     "localStorage": true,
     "fetch": false
+  },
+  "rules": {
+    "no-param-reassign": 0
   }
 }
