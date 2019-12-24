@@ -10,7 +10,7 @@ const GET_WEATHER = async (lat, lng, lang, units) => {
     const CURRENT = DATA.currently;
     const FORECAST = DATA.daily.data;
     const INFO = {
-      humidity: `${(CURRENT.humidity).toFixed(2) * 100}%`,
+      humidity: `${((CURRENT.humidity).toFixed(2) * 100).toFixed(0)}%`,
       icon: CURRENT.icon,
       summary: CURRENT.summary,
       temperature: Math.trunc(CURRENT.temperature),

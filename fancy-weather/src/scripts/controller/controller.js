@@ -28,7 +28,7 @@ function weatherSearch() {
             APP.day2Fahrenheit = TEMP_CONVERT('toF', data.daily.day_2.temperature);
             APP.day3Celsius = data.daily.day_3.temperature;
             APP.day3Fahrenheit = TEMP_CONVERT('toF', data.daily.day_3.temperature);
-          } else if (this.units === 'us') {
+          } else if (APP.units === 'us') {
             APP.mainFahrenheit = data.temperature;
             APP.apparentFahreheit = data.apparentTemp;
             APP.mainCelsius = TEMP_CONVERT('toC', data.temperature);
@@ -90,9 +90,9 @@ function weatherSearch() {
           APP.DOM.day_THREE_ICON.className = GET_ICONS(APP.localTime.hour)[data.daily.day_3.icon];
           APP.updateImage(APP.localTime.season, APP.localTime.isDayTime, APP.condition);
           if (APP.DOM.location.textContent.length > 30) {
-            APP.DOM.location.style.fontSize = '38px';
+            APP.DOM.location.style.fontSize = '2.375rem';
           } else {
-            APP.DOM.location.style.fontSize = '45px';
+            APP.DOM.location.style.fontSize = '2.8125rem';
           }
           if (city === undefined && country) {
             const MSG = 'You have not entered valid city. Please try again';

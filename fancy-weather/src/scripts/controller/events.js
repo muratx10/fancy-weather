@@ -65,9 +65,9 @@ const CHANGE_LANG = (app = APP) => {
               ],
             );
             if (app.DOM.location.textContent.length > 30) {
-              app.DOM.location.style.fontSize = '38px';
+              app.DOM.location.style.fontSize = '2.375rem';
             } else {
-              app.DOM.location.style.fontSize = '45px';
+              app.DOM.location.style.fontSize = '2.8125rem';
             }
           });
       })
@@ -129,6 +129,42 @@ const EVENTS = () => {
 
   APP.DOM.refresh.addEventListener('click', () => {
     APP.updateImage(APP.localTime.season, APP.localTime.isDayTime, APP.condition);
+  });
+
+  const UID = {
+    _current: 0,
+    getNew() {
+      this._current++;
+      return this._current;
+    },
+  };
+
+  HTMLElement.prototype.pseudoStyle = function (element, prop, value) {
+    const _this = this;
+    const _sheetId = 'pseudoStyles';
+    const _head = document.head || document.getElementsByTagName('head')[0];
+    const _sheet = document.getElementById(_sheetId) || document.createElement('style');
+    _sheet.id = _sheetId;
+    const className = `pseudoStyle${UID.getNew()}`;
+    _this.className += ` ${className}`;
+    _sheet.innerHTML += ` .${className}:${element}{${prop}:${value}}`;
+    _head.appendChild(_sheet);
+    return this;
+  };
+
+  APP.DOM.refresh.addEventListener('click', () => {
+    APP.DOM.refresh.pseudoStyle('before', 'animation', 'rotateIcon 1s ease');
+    // eslint-disable-next-line no-use-before-define
+    const TIMER = setTimeout(removeAnimation, 2000);
+    function removeAnimation() {
+      APP.DOM.refresh.pseudoStyle('before', 'animation', 'unset');
+      clearTimeout(TIMER);
+    }
+  });
+
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem('lang', APP.language);
+    localStorage.setItem('unit', APP.units);
   });
 };
 

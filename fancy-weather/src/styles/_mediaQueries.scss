@@ -1,3 +1,31 @@
+
+:root {
+  font-size: 16px;
+  
+  @media screen and (max-width: 768px){
+      font-size: 13px;
+  }
+
+  @media screen and (max-width: 576px){
+    font-size: 12px;
+  }
+  
+  @media screen and (max-width: 420px){
+    font-size: 10px;
+  }
+
+  @media screen and (max-width: 420px){
+    font-size: 8px;
+  }
+
+  @media screen and (max-width: 420px){
+    font-size: 8px;
+  }
+  
+  //@media screen and (max-height: 70px) {
+  //  font-size: 13px;
+  //}
+}
 @media screen and (max-width: 1170px) {
   //grid: 150px 4fr/2fr 1.5fr;
   //grid-template-areas:
@@ -47,6 +75,168 @@
         
         .mapContainer {
           height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 980px){
+  .root {
+    
+    .wrapper {
+      
+      .header {
+        grid: 1fr 1fr / 1fr;
+        
+        .control {
+          grid: 1fr/1fr 1fr 1fr;
+          max-width: unset;
+          padding: 0 0px;
+          width: 90%;
+          justify-self: center;
+          
+          .selectLang {
+            justify-self: center;
+            
+            .custom-options {
+              z-index: 99;
+            }
+            
+            .arrow {
+              right: -15px;
+            }
+          }
+          
+          .unit {
+            justify-self: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .degSign {
+    font-size: 80px;
+  }
+  
+  .coordsContainer {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 700px){
+  .root {
+    padding-top: 0;
+    
+    .wrapper {
+      width: 100%;
+      border-radius: unset;
+    }
+  }
+}
+
+@media screen and (max-width: 576px){
+  .root {
+    
+    .wrapper {
+      
+      .header {
+        grid: 1fr 1fr / 1fr;
+        
+        .control {
+          min-width: unset;
+        }
+      }
+      
+      .weather__condition {
+        min-width: unset;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px){
+  .bg {
+    display: none;
+  }
+;
+  .root {
+    
+    .wrapper {
+      grid: 150px 2fr 50% / 1fr;
+      
+      .header {
+        
+        .unit__item,
+        .custom-style__trigger,
+        .control__item {
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          border: 1px solid $textColor;
+        }
+
+        .custom-style__trigger {
+          width: auto;
+        }
+
+        .custom-option {
+          font-size: 14px;
+        }
+      }
+      
+      .weather {
+        
+        .weather__condition {
+          height: 185px;
+        }
+        
+        .forecast {
+          margin-top: 80px;
+          
+          .forecast__item {
+
+            .day {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      
+      .map {
+        grid: 2fr 30px /1fr;
+        height: 400px;
+        
+        .mapContainer {
+          overflow: visible;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 768px){
+  .root {
+
+    .wrapper {
+      overflow: scroll;
+
+      .header {
+        min-height: unset;
+        max-height: 80px;
+      }
+      
+      .weather {
+        
+        .weather__condition {
+          grid: 1fr / 1fr 1fr;
+        }
+        
+        .forecast {
+          margin-top: 20px;
         }
       }
     }

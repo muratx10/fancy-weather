@@ -4,6 +4,8 @@
 @import "weather-icons";
 @import "mediaQueries";
 
+
+
 body {
   font-family: "Montserrat", Arial, sans-serif;
   height: 100vh;
@@ -54,7 +56,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 125%;
     background: rgba(0, 0, 0, 0.45);
   }
 
@@ -93,7 +95,6 @@ body {
 
         &:hover {
           color: #FFFFFF;
-          //background: lighten($buttonBg, 25%);
           box-shadow: $textGlow;
           text-shadow: $textGlow;
         }
@@ -189,7 +190,7 @@ body {
     grid-area: weather;
 
     &__location {
-      font-size: 45px;
+      font-size: 2.813rem;
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -200,12 +201,12 @@ body {
 
     &__date {
       @include textShadow();
-      font-size: 35px;
+      font-size: 2.188rem;
       letter-spacing: 2px;
       color: $textColor;
 
       @media screen and (max-width: 1330px) {
-        font-size: 30px;
+        font-size: 1.875rem;
       }
     }
 
@@ -227,7 +228,7 @@ body {
 
       #temperature {
         @include textShadow();
-        font-size: 200px;
+        font-size: 12.5rem;
         font-weight: 700;
         line-height: 100px;
         position: relative;
@@ -235,7 +236,7 @@ body {
       }
 
       .degSign {
-        font-size: 120px;
+        font-size: 7.5rem;
         position: relative;
         top: 20px;
         display: none;
@@ -254,7 +255,7 @@ body {
         text-align: left;
 
         i {
-          font-size: 110px;
+          font-size: 6.875rem;
         }
       }
 
@@ -294,12 +295,12 @@ body {
         }
 
         & .day {
-          font-size: 22px;
+          font-size: 1.375rem;
           grid-area: day;
         }
 
         & .temperature {
-          font-size: 80px;
+          font-size: 4rem;
           line-height: 70px;
           grid-area: temp;
         }
@@ -327,3 +328,4 @@ body {
     }
   }
 }
+

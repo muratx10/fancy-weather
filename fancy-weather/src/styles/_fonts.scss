@@ -1,3 +1,5 @@
+@import "variables";
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../assets/fonts/icomoon.eot?4qsloe');
@@ -39,4 +41,5 @@
 }
 .icon-refresh:before {
   content: "\e902";
+  display: inline-block;
 }

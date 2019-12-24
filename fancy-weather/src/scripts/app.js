@@ -5,5 +5,5 @@ import { CHANGE_LANG, CHANGE_UNIT, EVENTS } from './controller/events';
 CHANGE_LANG();
 CHANGE_UNIT();
 EVENTS();
-console.log(`ДОРОГОЙ ДРУГ, ЕСЛИ НЕ ТРУДНО, ДАЙ ПОЖАЛУЙСТА ВРЕМЯ ДО ВЕЧЕРА, ДОДЕЛАТЬ АДАПТИВ.
-СПАСИБО!!!`);
+console.log('👋👋👋\nЕСЛИ БУДУТ КАКИЕ-ТО ВОПРОСЫ, ЗАМЕЧАНИЯ, ПОЖАЛУЙСТА НАПИШИ МНЕ https://t.me/muratx10\nК КРИТИКЕ ОТНОШУСЬ АДЕКВАТНО 😁');
+

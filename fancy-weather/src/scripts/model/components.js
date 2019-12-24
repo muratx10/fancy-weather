@@ -63,10 +63,13 @@ class WEATHER_APP {
     selectOption();
     this.DOM = {
       map: document.querySelector('.map'),
+      langSelect: document.querySelectorAll('.custom-option'),
       refresh: document.querySelector('.icon-refresh'),
       modal: document.getElementById('modal'),
       lang: document.querySelector('.selectLang'),
       unit: document.querySelector('.unit'),
+      unit_item: document.querySelectorAll('.unit__item'),
+      languageLabel: document.querySelector('.custom-style__trigger span'),
       search: document.querySelector('.searchForm'),
       searchInput: document.querySelector('#searchInput'),
       searchBtn: document.getElementById('search-btn'),
@@ -92,6 +95,22 @@ class WEATHER_APP {
       language: document.querySelector('.custom-style__trigger span'),
       selectedLang: document.querySelector('.custom-options'),
     };
+    this.language = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'en';
+    this.units = localStorage.getItem('unit') ? localStorage.getItem('unit') : 'si';
+    this.DOM.langSelect.forEach((el) => {
+      el.classList.remove('selected');
+      if (el.dataset.value === this.language) {
+        el.classList.add('selected');
+        this.DOM.languageLabel.textContent = this.language.toUpperCase();
+      }
+    });
+    this.DOM.unit_item.forEach((el) => {
+      if (this.units === el.dataset.type) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
+    });
   }
 
   GET_CURRENT_LOCATION_WEATHER(obj = this) {

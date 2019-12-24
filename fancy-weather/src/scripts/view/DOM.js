@@ -100,15 +100,15 @@ const GENERATE_HTML = () => {
                   <div class="arrow"></div>
                 </div>
                 <div class="custom-options">
-                  <span class="custom-option selected" data-value="tesla">EN</span>
-                  <span class="custom-option" data-value="volvo">RU</span>
-                  <span class="custom-option" data-value="mercedes">BE</span>
+                  <span class="custom-option selected" data-value="en">EN</span>
+                  <span class="custom-option" data-value="ru">RU</span>
+                  <span class="custom-option" data-value="be">BE</span>
                 </div>
               </div>
             </div>`;
   NODES.unit.innerHTML = `
-  <span class="unit__item active">&deg;C</span>
-  <span class="unit__item">&deg;F</span>`;
+  <span class="unit__item active" data-type="si">&deg;C</span>
+  <span class="unit__item" data-type="us">&deg;F</span>`;
   NODES.search.innerHTML = `
         <form class="searchForm" autocomplete="off">        
           <div class="input-group">
