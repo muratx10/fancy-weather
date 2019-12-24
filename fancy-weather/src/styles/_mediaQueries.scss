@@ -21,16 +21,9 @@
   @media screen and (max-width: 420px){
     font-size: 8px;
   }
-  
-  //@media screen and (max-height: 70px) {
-  //  font-size: 13px;
-  //}
 }
 @media screen and (max-width: 1170px) {
-  //grid: 150px 4fr/2fr 1.5fr;
-  //grid-template-areas:
-  //  "header header"
-  //  "weather map";
+  
   body .bg {
     height: 142vh;
     -webkit-background-size: cover;

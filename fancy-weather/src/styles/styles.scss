@@ -18,7 +18,6 @@ body {
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/images/default.jpg");
   background-repeat: no-repeat;
   background-position: 0 50%;
   background-size: 140%;
@@ -42,14 +41,12 @@ body {
   height: 90%;
   padding-left: 30px;
   border-radius: 15px;
-  background-image: url("../assets/images/default.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   grid: 150px 4fr / 2fr 1.5fr;
   grid-template-areas: "header header" "weather map";
   justify-self: center;
-  //border: 5px solid rgba(255, 255, 255, 0.7);
 
   .darkLayer {
     position: absolute;
@@ -182,10 +179,7 @@ body {
 
   .weather {
     position: relative;
-    //outline: 1px dashed blue;
     z-index: 1;
-    //display: grid;
-    //grid: 10% 5% 40% 40% / 1fr;
     padding-left: 15px;
     grid-area: weather;
 
@@ -222,7 +216,6 @@ body {
       position: relative;
       min-height: 270px;
       text-align: center;
-      //background: rgba(255, 255, 255, 0.5);
       letter-spacing: 2px;
       color: $textColor;
 
@@ -289,10 +282,6 @@ body {
         color: $textColor;
         grid: 1fr 3fr / 2fr 1fr;
         grid-template-areas: "day day" "temp temp";
-
-        &:not(:first-child) {
-          //border-left: 1px solid $textColor;
-        }
 
         & .day {
           font-size: 1.375rem;

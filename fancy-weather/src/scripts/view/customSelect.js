@@ -1,25 +1,25 @@
 export default function () {
-  for (const dropdown of document.querySelectorAll('.custom-select-wrapper')) {
-    dropdown.addEventListener('click', function () {
-      this.querySelector('.custom-style').classList.toggle('open');
+  document.querySelectorAll('.custom-select-wrapper').forEach((el) => {
+    el.addEventListener('click', () => {
+      el.querySelector('.custom-style').classList.toggle('open');
     });
-  }
+  });
 
-  for (const option of document.querySelectorAll('.custom-option')) {
-    option.addEventListener('click', function () {
-      if (!this.classList.contains('selected')) {
-        this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
-        this.classList.add('selected');
-        this.closest('.custom-style').querySelector('.custom-style__trigger span').textContent = this.textContent;
+  document.querySelectorAll('.custom-option').forEach((el) => {
+    el.addEventListener('click', () => {
+      if (!el.classList.contains('selected')) {
+        el.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+        el.classList.add('selected');
+        el.closest('.custom-style').querySelector('.custom-style__trigger span').textContent = el.textContent;
       }
     });
-  }
+  });
 
   window.addEventListener('click', (e) => {
-    for (const select of document.querySelectorAll('.custom-style')) {
-      if (!select.contains(e.target)) {
-        select.classList.remove('open');
+    document.querySelectorAll('.custom-style').forEach((el) => {
+      if (!el.contains(e.target)) {
+        el.classList.remove('open');
       }
-    }
+    });
   });
 }
