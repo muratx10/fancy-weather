@@ -235,3 +235,10 @@
     }
   }
 }
+
+@media screen and (min-width: 576px) {
+  .modal-dialog {
+    max-width: 650px;
+  }
+}
+

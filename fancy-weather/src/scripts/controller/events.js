@@ -2,8 +2,9 @@ import { APP } from '../model/components';
 import { GET_COORDS } from '../model/location';
 import GET_WEATHER from '../model/weatherAPI';
 import GET_TIME from '../model/time';
-import { RENDER, SHOW_MODAL } from '../view/DOM';
+import { RENDER } from '../view/DOM';
 import weatherSearch from './controller';
+import SHOW_MODAL from '../model/modalWindow';
 
 const CHANGE_LANG = (app = APP) => {
   const LANG_ELEM = app.DOM.selectedLang;
@@ -42,10 +43,10 @@ const CHANGE_LANG = (app = APP) => {
         const { city, country } = res;
         GET_WEATHER(res.lat, res.lng, app.language, app.units)
           .then((data) => {
-            app.timeZone = data.timeZone;
-            app.localTime = GET_TIME(app.timeZone, app.language);
+            app.weatherData = data;
+            app.localTime = GET_TIME(app.weatherData.currState.timeZone, app.language);
             clearInterval(app.TIMER_ID);
-            app.TIME_UPDATE(app.timeZone, app.language);
+            app.TIME_UPDATE(app.weatherData.currState.timeZone, app.language);
             RENDER(
               [
                 app.DOM.location,
@@ -58,7 +59,7 @@ const CHANGE_LANG = (app = APP) => {
               [
                 `${city}, ${country}`,
                 app.localTime.currentDate,
-                data.summary,
+                app.weatherData.currState.summary,
                 app.localTime.day_ONE,
                 app.localTime.day_TWO,
                 app.localTime.day_THREE,
@@ -72,8 +73,7 @@ const CHANGE_LANG = (app = APP) => {
           });
       })
       .catch(() => {
-        const MSG = 'The location you entered is invalid. Please try again.';
-        SHOW_MODAL(app.GET_CURRENT_LOCATION_WEATHER, app, MSG, false);
+        SHOW_MODAL(app.GET_CURRENT_LOCATION_WEATHER, app, false);
       });
   });
 };
@@ -81,26 +81,25 @@ const CHANGE_LANG = (app = APP) => {
 const CHANGE_UNIT = (app = APP) => {
   const { unit } = app.DOM;
   unit.addEventListener('click', (e) => {
-    app.currentTemp = app.DOM.temperature.textContent;
     unit.childNodes.forEach((el) => {
       if (el.nodeType === 1) {
         el.classList.remove('active');
       }
     });
-    if (e.target.textContent === '°C') {
+    if (e.target.dataset.type === 'si') {
       app.units = 'si';
-      app.DOM.temperature.textContent = app.mainCelsius;
-      app.DOM.feelingTemp.textContent = app.apparentCelsius;
-      app.DOM.day_ONE_TEMP.textContent = app.day1Celsius;
-      app.DOM.day_TWO_TEMP.textContent = app.day2Celsius;
-      app.DOM.day_THREE_TEMP.textContent = app.day3Celsius;
+      app.DOM.temperature.textContent = app.weatherData.temp.C.current;
+      app.DOM.feelingTemp.textContent = app.weatherData.temp.C.apparent;
+      app.DOM.day_ONE_TEMP.textContent = app.weatherData.temp.C.day_1;
+      app.DOM.day_TWO_TEMP.textContent = app.weatherData.temp.C.day_2;
+      app.DOM.day_THREE_TEMP.textContent = app.weatherData.temp.C.day_3;
     } else {
       app.units = 'us';
-      app.DOM.temperature.textContent = app.mainFahrenheit;
-      app.DOM.feelingTemp.textContent = app.apparentFahreheit;
-      app.DOM.day_ONE_TEMP.textContent = app.day1Fahrenheit;
-      app.DOM.day_TWO_TEMP.textContent = app.day2Fahrenheit;
-      app.DOM.day_THREE_TEMP.textContent = app.day3Fahrenheit;
+      app.DOM.temperature.textContent = app.weatherData.temp.F.current;
+      app.DOM.feelingTemp.textContent = app.weatherData.temp.F.apparent;
+      app.DOM.day_ONE_TEMP.textContent = app.weatherData.temp.F.day_1;
+      app.DOM.day_TWO_TEMP.textContent = app.weatherData.temp.F.day_2;
+      app.DOM.day_THREE_TEMP.textContent = app.weatherData.temp.F.day_3;
     }
     if (e.target.className === 'unit__item') e.target.classList.add('active');
   });
@@ -128,7 +127,7 @@ const EVENTS = () => {
   });
 
   APP.DOM.refresh.addEventListener('click', () => {
-    APP.updateImage(APP.localTime.season, APP.localTime.isDayTime, APP.condition);
+    APP.updateImage(APP.localTime.season, APP.localTime.isDayTime, APP.weatherData.icons.current);
   });
 
   const UID = {

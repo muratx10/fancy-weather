@@ -3,7 +3,6 @@
 /* eslint-disable no-console */
 
 
-
 const GET_COORDS = async (address, language = 'en') => {
   const API_KEY = '81d6df3ae65b430aaa589e095c541a4e';
   const TRIMMED_ADDRESS = address.trim();

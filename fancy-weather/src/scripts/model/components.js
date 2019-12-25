@@ -4,7 +4,6 @@ import GET_WEATHER from './weatherAPI';
 import { RENDER, GENERATE_HTML } from '../view/DOM';
 import GET_TIME from './time';
 import GET_IMAGE from './getImage';
-import TEMP_CONVERT from './degreeConverter';
 import { createMap } from './map';
 
 const GET_ICONS = (hour) => {
@@ -119,37 +118,13 @@ class WEATHER_APP {
       .then((response) => {
         const { city, country } = response;
         createMap(response.lat, response.lng);
-        GET_WEATHER(response.lat, response.lng, app.language, app.units)
+        GET_WEATHER(response.lat, response.lng, app.language)
           .then((data) => {
-            app.condition = data.icon;
-            if (app.units === 'si') {
-              app.mainCelsius = data.temperature;
-              app.apparentCelsius = data.apparentTemp;
-              app.mainFahrenheit = TEMP_CONVERT('toF', data.temperature);
-              app.apparentFahreheit = TEMP_CONVERT('toF', data.apparentTemp);
-              app.day1Celsius = data.daily.day_1.temperature;
-              app.day1Fahrenheit = TEMP_CONVERT('toF', data.daily.day_1.temperature);
-              app.day2Celsius = data.daily.day_2.temperature;
-              app.day2Fahrenheit = TEMP_CONVERT('toF', data.daily.day_2.temperature);
-              app.day3Celsius = data.daily.day_3.temperature;
-              app.day3Fahrenheit = TEMP_CONVERT('toF', data.daily.day_3.temperature);
-            } else if (app.units === 'us') {
-              app.mainFahrenheit = data.temperature;
-              app.apparentFahreheit = data.apparentTemp;
-              app.mainCelsius = TEMP_CONVERT('toC', data.temperature);
-              app.apparentCelsius = TEMP_CONVERT('toC', data.apparentTemp);
-              app.day1Celsius = TEMP_CONVERT('toC', data.daily.day_1.temperature);
-              app.day1Fahrenheit = data.daily.day_1.temperature;
-              app.day2Celsius = TEMP_CONVERT('toC', data.daily.day_2.temperature);
-              app.day2Fahrenheit = data.daily.day_2.temperature;
-              app.day3Celsius = TEMP_CONVERT('toC', data.daily.day_3.temperature);
-              app.day3Fahrenheit = data.daily.day_3.temperature;
-            }
-            app.timeZone = data.timeZone;
-            app.localTime = GET_TIME(app.timeZone, app.language);
+            app.weatherData = data;
+            app.localTime = GET_TIME(app.weatherData.currState.timeZone, app.language);
             app.hour = app.localTime.hour;
             clearInterval(app.TIMER_ID);
-            app.TIME_UPDATE(app.timeZone, app.language);
+            app.TIME_UPDATE(app.weatherData.currState.timeZone, app.language);
             RENDER(
               [
                 app.DOM.location,
@@ -169,25 +144,25 @@ class WEATHER_APP {
               [
                 `${city}, ${country}`,
                 app.localTime.currentDate,
-                data.temperature,
-                data.apparentTemp,
-                data.summary,
-                data.humidity,
-                data.windSpeed,
+                app.units === 'si' ? app.weatherData.temp.C.current : app.weatherData.temp.F.current,
+                app.units === 'si' ? app.weatherData.temp.C.apparent : app.weatherData.temp.F.apparent,
+                app.weatherData.currState.summary,
+                app.weatherData.currState.humidity,
+                app.weatherData.currState.windSpeed,
                 app.localTime.day_ONE,
-                data.daily.day_1.temperature,
+                app.units === 'si' ? app.weatherData.temp.C.day_1 : app.weatherData.temp.F.day_1,
                 app.localTime.day_TWO,
-                data.daily.day_2.temperature,
+                app.units === 'si' ? app.weatherData.temp.C.day_2 : app.weatherData.temp.F.day_2,
                 app.localTime.day_THREE,
-                data.daily.day_3.temperature,
+                app.units === 'si' ? app.weatherData.temp.C.day_3 : app.weatherData.temp.F.day_3,
               ],
             );
             document.querySelector('.degSign').style.display = 'inline';
-            app.DOM.icon.className = GET_ICONS(app.hour, app)[data.icon];
-            app.DOM.day_ONE_ICON.className = GET_ICONS(app.hour, app)[data.daily.day_1.icon];
-            app.DOM.day_TWO_ICON.className = GET_ICONS(app.hour, app)[data.daily.day_2.icon];
-            app.DOM.day_THREE_ICON.className = GET_ICONS(app.hour, app)[data.daily.day_3.icon];
-            app.updateImage(app.localTime.season, app.localTime.isDayTime, app.condition);
+            app.DOM.icon.className = GET_ICONS(app.hour, app)[app.weatherData.icons.current];
+            app.DOM.day_ONE_ICON.className = GET_ICONS(app.hour, app)[app.weatherData.icons.day_1];
+            app.DOM.day_TWO_ICON.className = GET_ICONS(app.hour, app)[app.weatherData.icons.day_2];
+            app.DOM.day_THREE_ICON.className = GET_ICONS(app.hour, app)[app.weatherData.icons.day_3];
+            app.updateImage(app.localTime.season, app.localTime.isDayTime, app.weatherData.icons.current);
           });
       })
       .catch((err) => {
@@ -213,7 +188,5 @@ class WEATHER_APP {
 }
 
 const APP = new WEATHER_APP();
-APP.init();
-APP.GET_CURRENT_LOCATION_WEATHER();
 
 export { APP, GET_ICONS };

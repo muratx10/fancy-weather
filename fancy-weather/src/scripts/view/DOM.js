@@ -159,43 +159,4 @@ const GENERATE_HTML = () => {
   `;
 };
 
-const SHOW_MODAL = (callback, arg, message, inactiveBTN) => {
-  const body = document.querySelector('body');
-  const modal = document.getElementById('modal');
-  const closeBtn = document.querySelectorAll('.closeBtn');
-  const backDrop = document.createElement('div');
-  const messageText = document.querySelector('.modal-body');
-  if (message) messageText.textContent = message;
-  if (inactiveBTN) {
-    closeBtn.forEach((i) => {
-      i.classList.add('disabled');
-      i.style.cursor = 'not-allowed';
-    });
-  } else {
-    closeBtn.forEach((i) => {
-      i.classList.remove('disabled');
-      i.style.cursor = 'pointer';
-    });
-  }
-  backDrop.className = 'modal-backdrop fade show';
-  body.appendChild(backDrop);
-  body.classList.add('modal-open');
-  modal.classList.add('show');
-  modal.style.display = 'block';
-  modal.addEventListener('click', (e) => {
-    if (e.target.classList.contains('closeBtn') && !e.target.classList.contains('disabled')) {
-      body.classList.remove('modal-open');
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-      backDrop.remove();
-    } else if (e.target.id === 'getCurrent') {
-      callback(arg);
-      body.classList.remove('modal-open');
-      modal.classList.remove('show');
-      modal.style.display = 'none';
-      backDrop.remove();
-    }
-  });
-};
-
-export { RENDER, GENERATE_HTML, SHOW_MODAL };
+export { RENDER, GENERATE_HTML };
