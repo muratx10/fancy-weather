@@ -118,6 +118,9 @@ const GENERATE_HTML = () => {
             </div>
             <input pattern=".{3,}" required class="form-control"
               id="searchInput" placeholder="Search..." type="text">
+            <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
             <div class="input-group-append">
               <button class="btn btn-dark" id="search-btn" type="button">
                 Search

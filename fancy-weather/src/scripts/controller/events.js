@@ -107,7 +107,7 @@ const CHANGE_UNIT = (app = APP) => {
 
 
 const EVENTS = () => {
-  APP.DOM.search.addEventListener('submit', (e) => {
+  APP.DOM.searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
     weatherSearch();
   });

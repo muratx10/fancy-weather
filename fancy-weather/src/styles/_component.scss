@@ -251,3 +251,14 @@
   border: 1px solid transparent;
   transition: 200ms;
 }
+
+.searchForm {
+  position: relative;
+
+  .spinner-grow {
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    display: none;
+  }
+}

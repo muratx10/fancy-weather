@@ -71,7 +71,7 @@ function weatherSearch() {
     .catch(() => {
       SHOW_MODAL(APP.GET_CURRENT_LOCATION_WEATHER, APP, false);
     });
-  APP.DOM.search.reset();
+  APP.DOM.searchForm.reset();
 }
 
 export default weatherSearch;
